@@ -45,13 +45,6 @@ class Game extends React.Component {
     );
   }
 
-  jumpTo(step) {
-    this.setState({
-      stepNumber: step,
-      xIsNext: step % 2 === 0,
-    });
-  }
-
   handleSizeChange(event) {
     const size = parseInt(event.target.value, 10);
     this.setState({
@@ -162,7 +155,7 @@ class Game extends React.Component {
         <div class="d-flex align-items-center justify-contant-center flex-column col-md-5 col-sm-12">
         <div class="d-flex flex-column align-items-center justify-content-center">
             <h1 class="fontstyle"><i class="fa-solid fa-x color_x"></i> Tec Tac Toe <i class="fa-solid fa-o color_o"></i></h1> 
-            <h5 class="fontstyle"> <span class="react">React</span> and <span class="codeig">Codeigniter4</span></h5>
+            <h5 class="fontstyle"> <span class="react">React js</span> and <span class="codeig">Codeigniter4</span></h5>
         </div> 
         <div class="d-flex align-items-center justify-contant-center m-1">
           <h3 class="fontstyle">Size: </h3>

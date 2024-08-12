@@ -1,112 +1,239 @@
-# CodeIgniter 4 Development
+# Tic Tac Toe Game - Codeigniter 4 and React js
 
-[![PHPUnit](https://github.com/codeigniter4/CodeIgniter4/actions/workflows/test-phpunit.yml/badge.svg)](https://github.com/codeigniter4/CodeIgniter4/actions/workflows/test-phpunit.yml)
-[![PHPStan](https://github.com/codeigniter4/CodeIgniter4/actions/workflows/test-phpstan.yml/badge.svg)](https://github.com/codeigniter4/CodeIgniter4/actions/workflows/test-phpstan.yml)
-[![Psalm](https://github.com/codeigniter4/CodeIgniter4/actions/workflows/test-psalm.yml/badge.svg)](https://github.com/codeigniter4/CodeIgniter4/actions/workflows/test-psalm.yml)
-[![Coverage Status](https://coveralls.io/repos/github/codeigniter4/CodeIgniter4/badge.svg?branch=develop)](https://coveralls.io/github/codeigniter4/CodeIgniter4?branch=develop)
-[![Downloads](https://poser.pugx.org/codeigniter4/framework/downloads)](https://packagist.org/packages/codeigniter4/framework)
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/codeigniter4/CodeIgniter4)](https://packagist.org/packages/codeigniter4/framework)
-[![GitHub stars](https://img.shields.io/github/stars/codeigniter4/CodeIgniter4)](https://packagist.org/packages/codeigniter4/framework)
-[![GitHub license](https://img.shields.io/github/license/codeigniter4/CodeIgniter4)](https://github.com/codeigniter4/CodeIgniter4/blob/develop/LICENSE)
-[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/codeigniter4/CodeIgniter4/pulls)
-<br>
+เป็นโปรแกรมเกม X/O ที่สร้างขึ้นโดยใช้ font-end เป็น React js และ back-end ใช้ Codeigniter 4 ติดต่อฐานข้อมูล mySql ด้วย Api ตัวโปรแกรม สามารถปรับขนาดของตารางได้ 3 ขนาดคือ 3x3,4x4 และ 5x5 เมื่อเกมมีผู้ชนะจะสามารถบันทึกประวัติการเล่น และดูประวัติการเล่นได้ 
+![Display](https://github.com/user-attachments/assets/fd1e3916-d65d-4322-9dae-ce20ad0b6a84)
 
-## What is CodeIgniter?
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](https://codeigniter.com).
+## สารบัญ Table of Content
 
-This repository holds the source code for CodeIgniter 4 only.
-Version 4 is a complete rewrite to bring the quality and the code into a more modern version,
-while still keeping as many of the things intact that has made people love the framework over the years.
+ - [ขั้นตอนการติดตั้ง](#%E0%B8%82%E0%B8%B1%E0%B9%89%E0%B8%99%E0%B8%95%E0%B8%AD%E0%B8%99%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%95%E0%B8%B4%E0%B8%94%E0%B8%95%E0%B8%B1%E0%B9%89%E0%B8%87)
+ - [วิธีการใช้งาน](#%E0%B8%A7%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B9%83%E0%B8%8A%E0%B9%89%E0%B8%87%E0%B8%B2%E0%B8%99)
+ - 
 
-More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
+### ขั้นตอนการติดตั้ง   
+### วิธีการใช้งาน 
 
-### Documentation
+### เครดิต
 
-The [User Guide](https://codeigniter.com/user_guide/) is the primary documentation for CodeIgniter 4.
 
-You will also find the [current **in-progress** User Guide](https://codeigniter4.github.io/CodeIgniter4/).
-As with the rest of the framework, it is a work in progress, and will see changes over time to structure, explanations, etc.
+### Font-end Design
+โดยการออกแบบหน้าเว็บจะพยายามทำออกมาให้เหมือนกับการเล่นเกมโดยใช้ โทนสี ฟ้อนต์ ให้ดูน่าสนใจ และ การใช้งานง่าย
 
-You might also be interested in the [API documentation](https://codeigniter4.github.io/api/) for the framework components.
+### Back-end Design
 
-## Important Change with index.php
+  
 
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
+### Game Logic
 
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
+การเดินเกมจะมี function อยู่ 3 ส่วนหลัก คือ
 
-**Please** read the user guide for a better explanation of how CI4 works!
+  
 
-## Repository Management
+1. function render() สำหรับการสร้างตาราง จะมีกำหนดตัวแปร history จากค่า history จากใน state ,กำหนดตัวแปร current ให้เข้าถึง array จำนวนครั้งที่เดินใน history โดยกำหนดค่ามาจาก state.stepNumber และ กำหนดตัวแปร winner จากการคำนวณโดยส่งค่า current.squares และ this.state.size ไปคำนวณผู้ชนะ
 
-CodeIgniter is developed completely on a volunteer basis. As such, please give up to 7 days
-for your issues to be reviewed. If you haven't heard from one of the team in that time period,
-feel free to leave a comment on the issue so that it gets brought back to our attention.
+จากนั้นมีการส่งค่าไปใน Component Board เพื่อสร้างตาราง
 
-> [!IMPORTANT]
-> We use GitHub issues to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-> We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-> FEATURE REQUESTS.
+```yaml
+render() {
+const history = this.state.history;
+const current = history[this.state.stepNumber];
+const winner = calculateWinner(current.squares, this.state.size);
+let status;
+if (winner) {
+status = 'Winner: ' + winner;
+console.log(this.btn_status.history,this.btn_status.disabled)
+if(this.btn_status.history==true){
+this.btn_status.disabled=true
+}else{
+this.btn_status.disabled=false
+}
+} else {
+status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
+}
+.
+.
+.
+<Board
+squares={current.squares}
+size={this.state.size}
+onClick={(i) => this.handleClick(i)}
+/>
+```
 
-If you raise an issue here that pertains to support or a feature request, it will
-be closed! If you are not sure if you have found a bug, raise a thread on the forum first -
-someone else may have encountered the same thing.
+  
 
-Before raising a new GitHub issue, please check that your bug hasn't already
-been reported or fixed.
+2. function calculateWinner() สำหรับคำนวณผู้ชนะ โดยการตรวจสอบว่ามีแถว, คอลัมน์, หรือเส้นทแยงมุมใดที่มีเครื่องหมาย (X หรือ O) เหมือนกันทั้งหมดหรือไม่
 
-We use pull requests (PRs) for CONTRIBUTIONS to the repository.
-We are looking for contributions that address one of the reported bugs or
-approved work packages.
+```yaml
 
-Do not use a PR as a form of feature request.
-Unsolicited contributions will only be considered if they fit nicely
-into the framework roadmap.
-Remember that some components that were part of CodeIgniter 3 are being moved
-to optional packages, with their own repository.
+function calculateWinner(squares, size) {
 
-## Contributing
+const lines = [];
 
-We **are** accepting contributions from the community! It doesn't matter whether you can code, write documentation, or help find bugs,
-all contributions are welcome.
+  
 
-Please read the [*Contributing to CodeIgniter*](https://github.com/codeigniter4/CodeIgniter4/blob/develop/contributing/README.md).
+// ตรวจสอบแถวและคอลัมน์
 
-CodeIgniter has had thousands on contributions from people since its creation. This project would not be what it is without them.
+for (let i = 0; i < size; i++) {
 
-<a href="https://github.com/codeigniter4/CodeIgniter4/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=codeigniter4/CodeIgniter4" />
-</a>
+const row = [];
 
-Made with [contrib.rocks](https://contrib.rocks).
+const col = [];
 
-## Server Requirements
+for (let j = 0; j < size; j++) {
 
-PHP version 8.1 or higher is required, with the following extensions installed:
+row.push(i * size + j);
 
-- [intl](http://php.net/manual/en/intl.requirements.php)
-- [mbstring](http://php.net/manual/en/mbstring.installation.php)
+col.push(j * size + i);
 
-> [!WARNING]
-> - The end of life date for PHP 7.4 was November 28, 2022.
-> - The end of life date for PHP 8.0 was November 26, 2023.
-> - If you are still using PHP 7.4 or 8.0, you should upgrade immediately.
-> - The end of life date for PHP 8.1 will be December 31, 2025.
+}
 
-Additionally, make sure that the following extensions are enabled in your PHP:
+lines.push(row);
 
-- json (enabled by default - don't turn it off)
-- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+lines.push(col);
 
-## Running CodeIgniter Tests
+}
 
-Information on running the CodeIgniter test suite can be found in the [README.md](tests/README.md) file in the tests directory.
+  
 
-### Test readme
--1234
+// ตรวจสอบเส้นทแยงมุม
+
+const diag1 = [];
+
+const diag2 = [];
+
+for (let i = 0; i < size; i++) {
+
+diag1.push(i * size + i);
+
+diag2.push(i * size + (size - i - 1));
+
+}
+
+lines.push(diag1);
+
+lines.push(diag2);
+
+  
+
+// ตรวจสอบทุกเส้นที่บรรจุอยู่ใน lines
+
+for (let i = 0; i < lines.length; i++) {
+
+const [a, b, ...rest] = lines[i];
+
+if (squares[a] && squares[a] === squares[b] && rest.every((index) => squares[a] === squares[index])) {
+
+return squares[a];
+
+}
+
+}
+
+return null;
+
+}
+
+```
+
+  
+
+3. function handleClick() สำหรับกำหนดค่า X | O ลงในปุ่มที่กดและเปลี่ยนตาผู้เล่น
+
+```yaml
+
+handleClick(i) {
+
+const history = this.state.history.slice(0, this.state.stepNumber + 1);
+
+const current = history[history.length - 1];
+
+const squares = current.squares.slice();
+
+if (calculateWinner(squares, this.state.size) || squares[i]) {
+
+return;
+
+}
+
+squares[i] = this.state.xIsNext ? 'X' : 'O';
+
+this.setState(
+
+{
+
+history: history.concat([
+
+{
+
+squares: squares,
+
+},
+
+]),
+
+stepNumber: history.length,
+
+xIsNext: !this.state.xIsNext,
+
+},
+
+() => this.saveGameHistory()
+
+);
+
+}
+
+```
+> **ProTip:** You can disable any **Markdown extension** in the **File properties** dialog.
+
+
+## SmartyPants
+
+SmartyPants converts ASCII punctuation characters into "smart" typographic punctuation HTML entities. For example:
+
+|                |ASCII                          |HTML                         |
+|----------------|-------------------------------|-----------------------------|
+|Single backticks|`'Isn't this fun?'`            |'Isn't this fun?'            |
+|Quotes          |`"Isn't this fun?"`            |"Isn't this fun?"            |
+|Dashes          |`-- is en-dash, --- is em-dash`|-- is en-dash, --- is em-dash|
+
+
+## KaTeX
+
+You can render LaTeX mathematical expressions using [KaTeX](https://khan.github.io/KaTeX/):
+
+The *Gamma function* satisfying $\Gamma(n) = (n-1)!\quad\forall n\in\mathbb N$ is via the Euler integral
+
+$$
+\Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt\,.
+$$
+
+> You can find more information about **LaTeX** mathematical expressions [here](http://meta.math.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference).
+
+
+## UML diagrams
+
+You can render UML diagrams using [Mermaid](https://mermaidjs.github.io/). For example, this will produce a sequence diagram:
+
+```mermaid
+sequenceDiagram
+Alice ->> Bob: Hello Bob, how are you?
+Bob-->>John: How about you John?
+Bob--x Alice: I am good thanks!
+Bob-x John: I am good thanks!
+Note right of John: Bob thinks a long<br/>long time, so long<br/>that the text does<br/>not fit on a row.
+
+Bob-->Alice: Checking with John...
+Alice->John: Yes... John, how are you?
+```
+
+And this will produce a flow chart:
+
+```mermaid
+graph LR
+A[Square Rect] -- Link text --> B((Circle))
+A --> C(Round Rect)
+B --> D{Rhombus}
+C --> D
+```
