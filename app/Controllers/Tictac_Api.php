@@ -6,7 +6,7 @@ use App\Models\TictacModel;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\RESTful\ResourceController;
 
-class Tictac extends ResourceController
+class Tictac_Api extends ResourceController
 {
     protected $modelName = 'App\Models\TictacModel';
     protected $format = 'json';
@@ -17,12 +17,6 @@ class Tictac extends ResourceController
         $this -> tac_tac = new TictacModel();
         $this -> request = \Config\Services::request();
     }
-
-    public function index(): string
-    {
-        return view('tic_tac_toe');
-    }
-
     
     public function history(){
         $data["code"] ="" ;

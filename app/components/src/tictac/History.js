@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
-import axios from 'axios';
-const History=(props)=> {
+
+const History=(props,onClick)=> {
   let winnerCheck ;
   const Datetime = new Date(props.date);
-  let newDate =  `${Datetime.getDate()}/${Datetime.getMonth()+1}/${Datetime.getFullYear()}  |  ${Datetime.getHours()}:${Datetime.getMinutes()}`;
+  let newDate =  `Date:${Datetime.getDate()}/${Datetime.getMonth()+1}/${Datetime.getFullYear()} | Time:${Datetime.getHours()}:${Datetime.getMinutes()}`;
   if(props.winner==0){
     winnerCheck ='X'
   }else{
@@ -11,8 +11,10 @@ const History=(props)=> {
   }
 
   return (
-      <div class="btn-history">  
-        Size:{props.size} Winner:{winnerCheck} Time:{newDate}
+      <div class="btn-history" onClick={() => props.onClick()}>  
+        <div class="size">Size:{props.size}</div>
+        <div class="winner">Winner:{winnerCheck}</div>
+        <div class="date">{newDate}</div>  
       </div> 
          
   );

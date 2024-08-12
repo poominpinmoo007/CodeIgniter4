@@ -37,21 +37,58 @@ body{
 }
 
 .history{
-  width: 355px;
+  width: 380px;
   height: 500px; 
   background-color: #6EACDA;
   border-radius: 15px;
 }
 
 .btn-history{
+  display: flex;
   background-color: #a6c3da;
   border-radius: 10px;
   padding: 5px;
   margin-top:3px;
   transition: all .5s;
+  cursor: pointer;
+  border-color:1px #021526;
+  width: 100%;
 }
 
 .btn-history:hover{
   transition-duration: .1s;
   scale: 1.02;
+}
+
+.size{
+  color: #021526;
+  margin-right: 3px;
+  /* width: 100%; */
+}
+
+.winner{
+  color: #074479;
+  /* width: 100%; */
+  margin-right: 3px;
+}
+
+.date{
+  color: #076c79;
+  /* width: 100%; */
+}
+
+.color_x{
+  color: #076c79;
+}
+
+.color_o{
+  color: #797707;
+}
+
+.react{
+  color: #61dbfb;
+}
+
+.codeig{
+  color: #dd4814;
 }

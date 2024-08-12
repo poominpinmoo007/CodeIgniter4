@@ -11,15 +11,6 @@ export default class Main extends Component {
         <div class="d-flex flex-column align-items-center justify-content-center">
           <Game/>        
       </div>
-      {/* <div class="h-75 history col-md-4 col-sm-12">
-          <div> <h3>History</h3> </div>
-          <div>
-          <table>
-            <History/>
-          </table>
-          </div>
-          
-      </div> */}
     </main>
     
     

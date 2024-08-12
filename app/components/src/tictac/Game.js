@@ -2,8 +2,6 @@ import React,{ useEffect } from 'react';
 import Board from './Board';
 import axios from 'axios';
 import History from './History';
-import { Link } from 'react-router-dom';
-
   
 class Game extends React.Component {
 
@@ -70,6 +68,8 @@ class Game extends React.Component {
 
   resetGame() {
     const size = this.state.size;
+    this.btn_status.history = false; 
+    this.btn_status.disabled=true;
     this.setState({
       history: [
         {
@@ -107,39 +107,8 @@ class Game extends React.Component {
       alert('Erroe: '+error)
     })
     this.btn_status.disabled = true; 
+    this.loadGameHistory()
   }
-
-//   set_history(size, history, stepNumber, xIsNext) {
-//     const parsedHistory = typeof history === 'string' ? JSON.parse(history) : history;
-
-//     this.setState({
-//         size: size,
-//         history: parsedHistory,
-//         stepNumber: stepNumber,
-//         xIsNext: xIsNext,
-//     });
-
-//     console.log("History set successfully");
-// }
-history_test = [{squares:[null,null,null,null,null,null,null,null,null,]},
-                  {squares:["X",null,null,null,null,null,null,null,null,]},
-                  {squares:["X",null,"O",null,null,null,null,null,null,]},
-                  {squares:["X",null,"O",null,"X",null,null,null,null,]},
-                  {squares:["X",null,"O",null,"X","O",null,null,null,]},
-                  {squares:["X",null,"O",null,"X","O",null,null,"X",]},
-]
-
-set_history() {
-  this.setState({
-      size: 3,
-      history: this.history_test,
-      stepNumber: 5,
-      xIsNext: 0,
-  });
-
-  console.log("History set successfully");
-}
-
 
   loadGameHistory() {
     axios.get('http://localhost:8080/api/tic_tac_toe/history')
@@ -154,7 +123,19 @@ set_history() {
   }
 
   btn_status={
-    disabled : true
+    disabled : true,
+    history:false
+  }
+
+  set_history(size, history, step, winner) {
+    const parsedHistory = typeof history === 'string' ? JSON.parse(history) : history;
+    this.setState({
+        size: size,
+        history: parsedHistory,
+        stepNumber: step,
+        xIsNext: winner,
+    });
+    this.btn_status.history = true; 
   }
 
   render() {
@@ -165,7 +146,12 @@ set_history() {
     let status;
     if (winner) {
       status = 'Winner: ' + winner;
-      this.btn_status.disabled = false; 
+      console.log(this.btn_status.history,this.btn_status.disabled)
+      if(this.btn_status.history==true){
+        this.btn_status.disabled=true
+      }else{
+        this.btn_status.disabled=false
+      }
     } else {
       status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
     }
@@ -175,8 +161,8 @@ set_history() {
         <div class="col-md-3 col-sm-12"></div>
         <div class="d-flex align-items-center justify-contant-center flex-column col-md-5 col-sm-12">
         <div class="d-flex flex-column align-items-center justify-content-center">
-            <h1 class="fontstyle">Tec Tac Toe</h1>
-            <h5 class="fontstyle">React and Codeigniter4</h5>
+            <h1 class="fontstyle"><i class="fa-solid fa-x color_x"></i> Tec Tac Toe <i class="fa-solid fa-o color_o"></i></h1> 
+            <h5 class="fontstyle"> <span class="react">React</span> and <span class="codeig">Codeigniter4</span></h5>
         </div> 
         <div class="d-flex align-items-center justify-contant-center m-1">
           <h3 class="fontstyle">Size: </h3>
@@ -208,8 +194,7 @@ set_history() {
         </div>
         <div class="m-1 d-flex flex-column">
           <button class="btn btn-primary my-2" onClick={() => this.resetGame()}><i class="fa-solid fa-rotate-right"></i> Reset Game</button>
-          <button class="btn btn-success " disabled={this.btn_status.disabled} onClick={() => this.saveGameHistory()}>Save</button>
-          <button class="btn btn-success my-2" onClick={() => this.set_history()}>test</button>
+          <button class="btn btn-success " disabled={this.btn_status.disabled} onClick={() => this.saveGameHistory()}><i class="fa-regular fa-floppy-disk"></i> Save</button>
         </div>
       </div>
       <div class="container-fluid  col-md-4 col-sm-12 d-flex align-items-center justify-contant-center flex-column">
@@ -219,7 +204,7 @@ set_history() {
         <div class="container-fluid d-flex align-items-center justify-contant-center p-2 ">
           <div class="table_over">
           {this.state.historys.map((data)=>{
-            return <History size={data.size} winner={data.winner} date={data.date} onClick={()=>{console.log(index)}} />
+            return <History size={data.size} winner={data.winner} date={data.date} onClick={()=>{this.set_history(data.size, data.history, data.step, data.winner)}} />
           })}
             
           </div>
