@@ -11,10 +11,7 @@ export default class Main extends Component {
         <div class="d-flex flex-column align-items-center justify-content-center">
           <Game/>        
       </div>
-    </main>
-    
-    
-      
+    </main>  
     )
   }
 }
