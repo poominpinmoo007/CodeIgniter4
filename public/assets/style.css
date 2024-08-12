@@ -1,0 +1,57 @@
+
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: "Pixelify Sans", sans-serif;
+}
+
+body{
+  background-color: #021526;
+}
+
+.square{
+  width: 70px;
+  height: 70px;
+  font-size: 30px;
+  color: #E2E2B6;
+  background: #6EACDA;
+  border: none;
+  border-radius: 5px;
+  margin: 2px;
+  text-shadow: rgba(0, 0, 0, 0.25) 0 3px 8px;
+  transition: all .5s;
+}
+
+.square:hover {
+  box-shadow: #6EACDA 0 1px 10px;
+  transition-duration: .1s;
+  scale: 1.04;
+}
+
+.fontstyle{
+  color: #E2E2B6;
+}
+
+.fontwinner{
+  color: #EF5A6F;
+}
+
+.history{
+  width: 355px;
+  height: 500px; 
+  background-color: #6EACDA;
+  border-radius: 15px;
+}
+
+.btn-history{
+  background-color: #a6c3da;
+  border-radius: 10px;
+  padding: 5px;
+  margin-top:3px;
+  transition: all .5s;
+}
+
+.btn-history:hover{
+  transition-duration: .1s;
+  scale: 1.02;
+}
